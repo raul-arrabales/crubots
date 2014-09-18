@@ -1,0 +1,75 @@
+I have gotten fed up with the joystick not giving the robot full power 
+when it is all the way forward.  So i rewrote the translation from x, y 
+points to left, right motor commands.  I like this control much better 
+than the original.  feel free to use it too, and possibly improve upon. 
+  I think rotating the robot in place is still a little slow...
+
+replace the original 'if' statement on line 128 of DriveControl.cs with 
+mine:
+
+if (!chkStop.Checked)
+{
+     double left;
+     double right;
+
+     if (chkDrive.Checked == true)
+     {
+         //this is the raw length of the vector
+         double magnitude = Math.Sqrt(data.Y * data.Y + data.X * data.X);
+
+         //angle of the vector
+         double theta = Math.Atan2(data.Y, data.X);
+
+         //this is the maximum magnitude for a given angle
+         double maxMag;
+         if (Math.Abs(data.X) > Math.Abs(data.Y))
+             maxMag = Math.Abs(1000 / Math.Cos(theta));
+         else
+             maxMag = Math.Abs(1000 / Math.Sin(theta));
+
+         //a scaled down magnitude according to above
+         double scaledMag = magnitude * 1000 / maxMag;
+
+         //decompose the vector into motor components
+         if (data.Y > -150)
+         {
+             left = scaledMag * Math.Sin(theta) + scaledMag * 
+Math.Cos(theta) / 3;
+             right = scaledMag * Math.Sin(theta) - scaledMag * 
+Math.Cos(theta) / 3;
+         }
+         else
+         {
+             left = scaledMag * Math.Sin(theta) - scaledMag * 
+Math.Cos(theta) / 3;
+              right = scaledMag * Math.Sin(theta) + scaledMag * 
+Math.Cos(theta) / 3;
+         }
+     }
+     else
+     {
+         left = right = 0;
+     }
+
+     //cap at 1000
+     left = Math.Min(left, 1000);
+     right = Math.Min(right, 1000);
+     left = Math.Max(left, -1000);
+     right = Math.Max(right, -1000);
+
+     _eventsPort.Post(new OnMove(this, (int)Math.Round(left), 
+(int)Math.Round(right)));
+}
+
+And don't forget to remove this piece of evil code on line 968 of 
+DriveControl.cs
+
+public OnMove(DriveControl form, int left, int right)
+     : base(form)
+{
+     _left = left;// *750 / 1250;
+     _right = right;// *750 / 1250;
+}
+
+enjoy!
+

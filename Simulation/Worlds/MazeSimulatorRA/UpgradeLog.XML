@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="MazeSimulatorRA">
+</Property><Property Name="Archivo de la solución" Value="H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\MazeSimulatorRA.sln">
+</Property><Property Name="Archivo de opciones de usuario" Value="H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\MazeSimulatorRA.suo">
+</Property><Property Name="Date" Value="martes, 24 de noviembre de 2009">
+</Property><Property Name="Time" Value="13:18">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="MazeSimulatorRA.sln" Description="La copia H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\Backup\MazeSimulatorRA.sln del archivo se ha realizado correctamente">
+</Event><Event ErrorLevel="0" Project="" Source="MazeSimulatorRA.suo" Description="La copia H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\Backup\MazeSimulatorRA.suo del archivo se ha realizado correctamente">
+</Event><Event ErrorLevel="0" Project="MazeSimulatorRA" Source="MazeSimulatorRA.csproj" Description="Se realizó correctamente la copia de seguridad del archivo de proyecto H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\Backup\MazeSimulatorRA.csproj">
+</Event><Event ErrorLevel="0" Project="MazeSimulatorRA" Source="MazeSimulatorRA.csproj.user" Description="La copia de seguridad H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\Backup\MazeSimulatorRA.csproj.user del archivo se ha creado correctamente">
+</Event><Event ErrorLevel="0" Project="MazeSimulatorRA" Source="AssemblyInfo.cs" Description="Se realizó correctamente la copia de seguridad del archivo H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="MazeSimulatorRA" Source="MazeSimulatorRA.cs" Description="Se realizó correctamente la copia de seguridad del archivo H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\Backup\MazeSimulatorRA.cs">
+</Event><Event ErrorLevel="0" Project="MazeSimulatorRA" Source="MazeSimulatorRATypes.cs" Description="Se realizó correctamente la copia de seguridad del archivo H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\Backup\MazeSimulatorRATypes.cs">
+</Event><Event ErrorLevel="0" Project="MazeSimulatorRA" Source="mrisamples.snk" Description="Se realizó correctamente la copia de seguridad del archivo H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\Backup\mrisamples.snk">
+</Event><Event ErrorLevel="0" Project="MazeSimulatorRA" Source="MazeSimulatorRA.manifest.xml" Description="Se realizó correctamente la copia de seguridad del archivo H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Worlds\MazeSimulatorRA\Backup\MazeSimulatorRA.manifest.xml">
+</Event><Event ErrorLevel="0" Project="MazeSimulatorRA" Source="MazeSimulatorRA.csproj" Description="Proyecto convertido correctamente">
+</Event><Event ErrorLevel="3" Project="MazeSimulatorRA" Source="MazeSimulatorRA.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="MazeSimulatorRA.sln" Description="La solución se convirtió correctamente">
+</Event><Event ErrorLevel="3" Project="" Source="MazeSimulatorRA.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MazeSimulatorRA" Source="MazeSimulatorRA.csproj" Description="Examen completo: no es necesario actualizar los archivos de proyecto.">
+</Event></UpgradeLog>

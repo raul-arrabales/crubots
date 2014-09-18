@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+//  ExplorerSonar Manifest for Pioneer 3 DX robot.
+// 
+//  Raul Arrabales - raul at conscious-robots.com
+//
+//  $File: ExplorerSonar.manifest.xml $ $Revision: 7 $
+-->
+<Manifest
+    xmlns="http://schemas.microsoft.com/xw/2004/10/manifest.html"
+    xmlns:dssp="http://schemas.microsoft.com/xw/2004/10/dssp.html"
+    >
+
+  <CreateServiceList>
+
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/multidevicewebcamservice.html</dssp:Contract>
+      <dssp:Service>http://localhost/webcam</dssp:Service>
+    </ServiceRecordType>
+    
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://www.conscious-robots.com/2007/09/craniumdashboard.html</dssp:Contract>
+    </ServiceRecordType>
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2006/06/arcosbumper.html</dssp:Contract>
+    </ServiceRecordType>
+
+
+    <ServiceRecordType>
+      <dssp:Contract>http://www.conscious-robots.com/2007/07/sonar.html</dssp:Contract>
+    </ServiceRecordType>
+    
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2006/06/arcosdrive.html</dssp:Contract>
+    </ServiceRecordType>
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://www.conscious-robots.com/2007/09/explorersimsonar.html</dssp:Contract>
+    </ServiceRecordType>
+
+    </CreateServiceList>
+  
+</Manifest>

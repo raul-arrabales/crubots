@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>MSRS Maze Simulator Documentation</title>
+    <link href="Styles/Standard.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/index.htm"><img src="Images/MSRSCodePage.jpg" alt="MSRS Code Page Home" border="0" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/MazeSimulatorBanner.gif" alt="MSRS Maze Simulator" />
+<hr />
+<p class="heading"><span class="dropcap">D</span>ocumentation for Maze Simulator</p>
+<h2>Background</h2>
+<p>
+The Maze Simulator creates simple block worlds in the MSRS Simulator using a bitmap
+image as the template. This template effectively specifies both the height and the
+colour or texture of the walls or other rectangular objects in your maze. In addition,
+in the October version, you can have spherical objects.
+</p>
+<p>
+This page contains basic instructions for using the Intro program. Please read through
+the whole page before you attempt to install the program. Most of your questions
+should be answered by this page. You should also read the <a href="readme.txt">readme.txt</a> file that comes
+with the code in the ZIP file.
+</p>
+<h3>Marking the Walls in the Bitmap Image Template</h3>
+<p>
+The background colour in the image is the floor, and other
+objects are mapped by default to the 16 basic colours that are used in a
+Windows Paint (BMP) 16-colour image: Black, Red, Lime Green, Yellow, Blue, Magenta, Cyan,
+White, Light Grey, Dark Grey, Maroon, Dark Green, Olive, Navy, Purple, Cobalt.
+It is not necessary to use exactly these colours (as you will see from the example below).
+They just need to be close to the respective colours.
+</p>
+<img src="Images/ModelLarge.gif" />
+<p>
+When the Maze Simulator reads the bitmap, it assumes that the top-left pixel is 
+part of the floor and uses this colour to identify the rest of the floor. This pixel
+does not have to be one of the standard colours, and in fact it should be different
+from them so that you have all 16 colours available for use.
+</p>
+<p>
+Your walls cannot go all the way to the edge in the top corner because the top-left
+pixel identifies the floor colour. However, this is not a problem because the maze
+will be centered on the origin in the simulated world, so you can
+put a border around the maze using the floor colour and you won't even notice!
+</p>
+<p>
+Note that the image can be in any of the standard formats: BMP, GIF, JPG. You can use
+Microsoft Paint, for example, to draw your maze. In particular, you might want to use
+the 16-colour mode in Paint. However, in this case, you will lose one colour as the
+floor colour, i.e. you will only have 15 available for walls.
+</p>
+<p>
+If you want to change the maze, you can of course edit the program. However,
+most of the parameters for the program are now available in the saved
+state file (config file). This allows you to completely reconfigure the
+maze by just editing an XML file. To use this, copy the file called
+MazeSimulator.Config.xml (included in the ZIP) to the MSRS "store"
+directory. (This is under the location where you installed MSRS.)
+</p>
+<h3>Colour Mapping</h3>
+<p>
+With the default settings, the colours are mapped directly as you would expect,
+i.e. red becomes red! However, you can change the colour mapping in two different
+ways: change the values in the config file; or edit the program and recompile.
+(They are defined in the MazeSimulatorTypes.cs file as part of the
+MazeSimulatorState class.)
+</p>
+<p>
+To change the colours using the config file, look for the section
+called WallColors. This contains a list of 16 Vector3 items.
+Each of these has X, Y and Z values which actually correspond to
+Red, Green and Blue (RGB). You can set these values between 0 and 255.
+So for example, Cobalt Blue is 0, 128, 128.
+</p>
+<p>
+NOTE: Colour mapping is overridden by Texture Mapping (explained below).
+You must leave a "blank" in the list of texture files if you want to
+use a colour instead. 
+</p>
+<h3>Texture Mapping</h3>
+<p>
+A set of texture files is supplied in the images subdirectory under the MazeSimulator
+directory. <b>You must copy these to your store\media directory under your
+MSRS root directory.</b>
+</p>
+<p>
+These texture files give you 16 basic solid colours (although you don't need them
+because these are the default colours!) If you don't like them, open them in
+Paint and change the colours. You do not need to use texture files if you only want
+solid colours -- See the previous section on Colour Mapping.
+</p>
+<p>
+In addition, there are a couple of actual textures - water, sand, wood.
+This can also be used to cover your walls and other objects. The CheckerBoard.bmp
+is a simple black and white checkerboard that is used in the sample config file
+as the texture for the balls (spheres).
+</p>
+<p>
+If you want to change the textures that are used for the different colors,
+you can of course edit the program. However, they are also available in
+the config file in the WallTextures section. This is a list of nine
+strings which are the filenames. The default path is the
+store\media directory.
+</p>
+<p>
+NOTE: You can leave a texture "blank" by entering an empty
+string as follows:<br />
+&lt;string /&gt;<br />
+This will allow you to use Colour Mapping instead of a texture.
+If you don't want any textures, you can actually delete all of
+the strings in the WallTextures section. The next time you
+run the program, it will rewrite the file with a set of empty
+strings.
+</p>
+<h3>Height Mapping</h3>
+<p>
+The Maze Simulator uses a height table that maps each colour to a 
+(possibly) different height. You can change this table if you edit the code and
+recompile, or you can simple edit the xml config file. The heights are
+in the section called HeightMap in the config file. It is a simple list
+of 16 float values, one for each colour.
+</p>
+<p>
+Note that if you change the code, you can specify a "height" that is really small,
+as in 0.01, and the "blocks" will look like patches on the floor. You can also
+set up a really, really tall blocks, e.g. with a height of 1,000,000.
+</p>
+<p>
+The updated version for the September CTP had a swimming pool (if you
+use the supplied config file)! Or is it a pool? Perhaps it's only a
+mirage. You figure it out!
+</p>
+<p>
+Note that one of the new features added in the MSRS Simulator in the September
+CTP was the ability to use a greyscale image as a height field. This is
+much more sophisticated than this maze simulator. However, the maze
+simulator is much easier to get started with.
+</p>
+<p>
+In the October version of the Maze Simulator, I have added more options in the 
+config file that allow you to create spherical objects (see below). "Height" does not
+really make sense for these objects, so their size is calculated differently.
+You draw a square or rectangle into the bitmap image of the desired size for
+the sphere and the program figures out the radius.
+</p>
+<h3>Mass Mapping - Changing the Mass of Objects</h3>
+<p>
+In previous versions of the program, all the walls had infinite mass (weight).
+This meant that the robot could not push the walls around, and that is
+probably what you wanted. However, it is more fun if you can move things around,
+especially now that you can create spherical objects, i.e. balls! (See below for
+instructions on creating spheres.)
+</p>
+<p>
+The config file now contains a section called MassMap. This is similar to the
+HeightMap and has one value for each of the 16 colours. The mass is in kilograms.
+</p>
+<p>
+To create
+a simulation object with infinite mass you actually specify a value of zero for
+the mass. This is the default value. If you want to move an object around, then
+you can use small masses like a few kilograms. In the sample config file, the
+mass for the balls is set to 1 kg.
+</p>
+<p>
+Note that if you change the mass of a wall, then if might fall over on top of the
+robot if the robot bumps into it!
+</p>
+<h3>Creating Spherical Objects</h3>
+<p>
+There is a section in the config file called UseSphere that contains a set of
+16 boolean values. If you set one of these to <b>true</b>, then any pixels of the
+corresponding colour will be used to create spheres instead of walls (blocks).
+</p>
+<p>
+As noted above under "Height Mapping", the size of spheres is determined by the
+size of the "blob" in the bitmap image. You probably want to create squares,
+although the program will use the diagonal size of a rectangle if you the object
+you create is not square. This size is used to determin the radius of the sphere
+and it will be placed into the simulation at the center of the square/rectangle. 
+</p>
+<h3>Selecting a Robot Type</h3>
+<p>
+There are two types of simulated robots available:<br />
+Pioneer 3DX; and<br />
+Lego NXT
+</p>
+<p>
+To select the type of robot, you need to edit the config file and change the
+value of RobotType to either Pioneer3DX or LegoNXT (with no spaces). Note that
+the Pioneer robot has a camera mounted on top, but the Lego robot does not.
+</p>
+
+<h2>Requirements and Installation</h2>
+<p>
+To get started, you need to install the Microsoft Robotics Studio on your PC.
+It is available for free for non-commercial use from <a href="http://msdn.microsoft.com/robotics/downloads/">Download Site</a>.
+It requires the .NET 2.0 runtime, which is also available from Microsoft's download site.
+</p>
+<p>
+If you want to
+write your own code, then you will need Visual Studio 2005, but since there is not much
+point in using a Robotics Software Development Kit (SDK) without a compiler, I assume that
+you already have Visual Studio. In that case, you also have .NET 2.0 already installed.
+</p>
+<p>
+Download the Maze Simulator code using the link on the previous page. Unzip the file
+into your MSRS root directory. This will create a folder:<br />
+<tt>&lt;MSRS&gt;\Apps\QUT\MazeSimulator</tt><br />
+where &lt;MSRS&gt; is the directory that your copy of MSRS was installed into.
+In my case this is &quot;C:\Microsoft Robotics Studio (1.5)&quot; which corresponds to
+the Version 1.5 release.
+Notice that my MSRS is installed on the C: drive. If yours is on a different
+drive, then you will have to modify several settings in the Visual Studio
+project before compiling. See the <a href="readme.txt">readme.txt</a> for more information.
+</p>
+<p>
+<b>IMPORTANT NOTE:</b> In the explanations that follow I have assumed that
+you unzipped the Maze Simulator program into &lt;MSRS&gt;\Apps\QUT\MazeSimulator.
+</p>
+
+<h2>How to run the Maze Simulator</h2>
+<p>
+You have the option of either re-building the program yourself or just using it.
+If you do not want to build the code, or you don't have Microsoft
+Visual Studio 2005, then the executables are included in the ZIP file
+and there are instructions for setting it up and running it in <a href="readme.txt">readme.txt</a>.
+</p>
+<p>
+As with all MSRS programs, you need to start the Maze Simulator from a MSRS DOS Command Prompt window,
+or using the debugger in Visual Studio. Let's begin with running the program directly.
+Make sure you have followed the installation instructions exactly.
+</p>
+<h3>Starting a MSRS Service</h3>
+<p>
+When you installed MSRS, it should have created a folder in your Start
+Menu that contains a shortcut for "Microsoft Robotics Studio Command Prompt".
+Open one of these windows now.
+</p>
+<p>
+At the command prompt, enter the following command:<br />
+<tt>dsshost -port:50000 -tcpport:50001 -manifest:"Apps/QUT/MazeSimulator/MazeSimulator.manifest.xml"</tt><br />
+A batch file, called RunMazeSimulator.bat, is included in the ZIP to help make this easier.
+However, you
+need to copy this batch file into the MSRS root directory prior to running it.<br />
+<b>IMPORTANT NOTE:</b> dsshost.exe is the main control program for MSRS. It is responsible for
+starting services, i.e. programs like the Maze Simulator. You must run it from the MSRS root directory
+because it looks for various components starting from the current directory.
+</p>
+<h3>Using the Visual Studio Debugger</h3>
+<p>
+If you want to rebuild the code, then you must open the Solution in Visual Studio.
+There are two ways to do this:<br />
+From a MSRS Command Prompt window; or<br />
+From Windows Explorer.
+</p>
+<p>To open the program from a DOS prompt, select "Microsoft Robotics Studio
+Command Prompt" from the Start Menu, then start Visual Studio using the
+following commands:<br />
+<tt>cd Apps\QUT\MazeSimulator<br />
+devenv MazeSimulator.sln</tt><br />
+</p>
+<p>
+To open the program using Windows Explorer, locate the .sln file which is
+in the &lt;MSRS&gt;\Apps\QUT\MazeSimulator directory and double-click on it.
+</p>
+<p>
+Once the Solution is open in Visual Studio, you can start it with the debugger by
+selecting Debug \ Start Debugging or pressing F5.<br />
+<b>IMPORTANT NOTE:</b> Make sure that you have updated the Project settings if your
+MSRS installation is not on the C: drive. The instructions are in <a href="readme.txt">readme.txt</a>.
+</p>
+
+<h2>Using the Maze Simulator program</h2>
+<p>
+When Maze Simulator starts, it will create two windows: A <a href="Images/SimulatorInitialView.jpg">Simulator</a>
+and a <a href="Images/Dashboard.gif">Dashboard</a>. These are
+shown below. Click on the images for larger views.
+</p>
+<a href="Images/SimulatorInitialView.jpg"><img src="Images/SimulatorInitialView_small.jpg" alt="Simulator View - Click for larger image" border="0" /></a>&nbsp;&nbsp;<a href="Images/Dashboard.gif"><img src="Images/Dashboard_small.gif" alt="Dashboard - Click for larger image" border="0" /></a>
+<p>
+The little object in the centre of the Simulation window is the Pioneer robot.
+This maze world has textured walls and brightly coloured objects. None of them
+are moveable with the default settings, i.e. they all have infinite mass.
+This is something you can change in the config file later if you want to be able
+to push the walls around. However, there are some balls included in the sample
+config file and you can push them around.
+</p>
+<p>
+To change your viewpoint in the Simulator, click on the window and drag with
+the mouse. You can also use the standard gaming keys, A, S, D and W, for
+moving around. Note that A and D are strafe keys, not rotate. The S and W
+keys move forwards and backwards along the line of sight. Use the mouse to
+change the direction of motion by dragging on the simulation window.
+The E and Q keys can be used to move
+up and down. It's easy to get used to, especially if you are a gamer.
+</p>
+<p>
+The Simulation Engine allows multiple cameras to be used. You can 
+switch between cameras by pressing the F8 key in the Simulation window,
+or selecting a camera from the Camera menu.</p>
+<p>
+The Maze Simulator has a camera located on top of the Pioneer robot (although you
+can't see it). If you select the "robocam" camera from the Camera menu then you will
+be able to see what the robot sees as it drives around. This is more fun,
+and it is probably easier to drive the robot this way. A sample view from
+the robot is shown below:
+</p>
+<a href="Images/RobotView.jpg"><img src="Images/RobotView_small.jpg" alt="Robot View - Click for larger image" border="0" /></a>
+<p>
+In the Dashboard, you must enter localhost as the name of the Remote
+Node and Port number 50001. Then click on the Connect button.<br />
+Two services will appear in the listbox. Double-click on the
+<i>simulateddifferentialdrive</i> service, then click on the <b>Drive</b> button.
+You are now ready to control the robot!
+</p>
+<p>
+Note that I have written a modified version of the Dashboard that remembers
+these settings so you only have to enter them once and then save them. There
+is another manifest included with the files called MazeSimulator-Dashboard.manifest.xml.
+If you install my version of the Dashboard you can use this manifest to load
+it at startup.
+</p>
+<p>
+Use the mouse to drag on the trackball with the cross-hairs
+(just above the <b>Stop</b> button). If you
+drag left, the robot will rotate left; if you drag upwards, the robot
+will move forwards; and so on. Take a while to get the hang of it. Just be aware
+that the robot has inertia and will not move until you drag a
+certain distance away from the centre. Also, it will not stop
+immediately when you release the mouse button.
+Drive around for a while to get the feel of the Simulator and the Dashboard.
+</p>
+<p>
+You can also use a joystick or a game controller to control the robot.
+It must be compatible with DirectX, but most joysticks are these days.
+I have tested it using a Logitech Attack 3 USB joystick.
+</p>
+<p>
+You can also turn on the Laser Range Finder by double-clicking on the
+<i>simulatedlrf</i> service. You might have noticed red lines appearing
+on the walls as the robot moves around. This is the laser. Now you will be able
+to see in the Laser Range Finder panel a representation of what the robot thinks
+it "sees" using the laser. It does not actually see walls like in the Dashboard,
+this is just the way it is represented. Remember the laser scan is only in a
+single horizontal plane at a fixed height off the ground.
+</p>
+<h2>Shutting down the Maze Simulator</h2>
+<p>
+When you get tired of playing, you can stop
+the program by going back to the DOS window and typing Ctrl-C, i.e. hold
+down Ctrl and press 'c'. This stops the dsshost program, and with it all of
+the associated services that it started.
+</p>
+<p>
+Alternatively, you can select Exit from the File menu in the Simulator.
+</p>
+<h2>Where to from here?</h2>
+<p>
+The Maze Simulator on its own is just a toy. The real power comes when you
+learn how to write programs to control the simulated robot. For that you
+need to download and install the <a href="../Intro/Intro.htm">Intro to Autonomous Robotics</a>
+program.
+</p>
+<p>
+You should open the Maze Simulator in Visual Studio and look through it.
+I have put a lot of comments in the code. The dssnewservice program
+generated the basic structure. The basic skeleton of the code came from the
+Microsoft Simulation Tutorials.
+</p>
+<p>
+Now that you have run the Simulator, I suggest doing the Microsoft Simulation Tutorials.
+</p>
+
+<p>
+<a href="MazeSimulator.htm">[&nbsp;Overview&nbsp;]</a>&nbsp;|&nbsp;<a href="MazeSimulatorTutorial.htm">[&nbsp;Tutorial&nbsp;]</a>
+</p>
+<hr />
+<div class="footer">
+Page maintained by:
+<a href="m&#97;&#105;&#108;t&#111;:T.Taylor&#64;qut&#46;edu&#46;au">T.Taylor&#64;qut.edu.au</a>
+&nbsp;&nbsp;&nbsp;Last Updated: 18-Jul-2007
+</div>
+
+</div>
+
+</body>
+</html>

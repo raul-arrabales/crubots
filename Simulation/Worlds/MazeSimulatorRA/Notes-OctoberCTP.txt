@@ -1,0 +1,42 @@
+MazeSimulator - October CTP Update
+
+Had to remove and re-add the references.
+
+Some of the namespaces have changed. See the code.
+
+DiffuseColor is now a Vector4. Needed to change code in two places
+where the Wall Color was assigned. Also, have to add W component.
+
+Nothing appeared initially because I forgot to copy the config file
+and the textures to the store. However, an empty config was created
+and there were error messages about the missing texture files in the
+VS Output window.
+
+There is no robot! However I can connect to the drive in Dashboard.
+The mesh was missing because .x files are no longer used. (There was
+an error message in the Output window.)
+
+Robot orientation is incorrect. Same in the Microsoft Tutorial2.
+The problem is that the coordinate system for the Simulation has
+changed, but there is actually no way to change the orientation
+of the robot when it is created.
+
+Overall colour is darker now.
+Pure colours are however much brighter.
+The coordinate system has changed, so the viewpoint is now looking
+in the reverse direction. Need to change the code in several places
+to negate the Z coords.
+
+Still does not seem to be a rotate key in the Simulation :-(
+
+All the help info and data (position, fps, etc) have disappeared.
+None of the F keys seem to do much except F2 (physics).
+
+Increased the number of colours to 16 and changed the colour mapping
+code accordingly.
+
+Added MassMap to allow the mass of objects to be changed.
+
+Added UseSphere flags so that spherical objects can be used.
+
+Updated the State to contain all the new info.

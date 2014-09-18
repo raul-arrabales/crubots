@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <SampleSubDir>Simulation\Sensors\SimulatedSonar</SampleSubDir>
+        <Layout>sampleservice</Layout>
+    </PropertyGroup>
+</Project>

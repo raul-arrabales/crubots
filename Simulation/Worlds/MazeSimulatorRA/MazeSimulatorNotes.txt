@@ -1,0 +1,225 @@
+Maze Simulator - Development Notes
+
+Open in VS
+Go to project properties
+
+Change Output path in Build
+Change Post-Build Events in Build Events
+Change Start External Program and Working Directory in Debug
+Change Reference Paths
+Change Signing. Had to browse, and when I selected the file, it was
+copied into project directory.
+
+MSR\bin\services created on C:. How? Just opening the project?
+
+Post-build exited with error code 3, but message flashed up too fast
+to see.
+
+Offending command cannot be executed directly in a DOS window:
+"D:\Microsoft Robotics Studio (August 2006)\bin\dssproxy.exe" /dll:"$(TargetPath)"
+/proxyprojectpath:"$(ProjectDir)Proxy "
+/keyfile:"D:\Microsoft Robotics Studio (August 2006)\samples\mrisamples.snk"
+/binpath:". " @(ReferencePath->'/referencepath:"%(RootDir)%(Directory) "', ' ')
+
+However, a proxy appears to have been created.
+
+Started VS using devenv command from a MRS DOS window.
+Then it worked :-(
+OK, so you can't start VS from Windows Explorer ... VS needs some
+environment variables defined.
+
+Manifest was not copied to config directory. Should it be?
+There are no instructions for running the service. Presumably
+you are supposed to know how!
+
+Extracted info from the debug section of Project Properties:
+D:\Microsoft Robotics Studio (August 2006)\bin\dsshost.exe -port:50000 -tcpport:50001 -manifest:"MazeSimulator/MazeSimulator.manifest.xml"
+
+Seems to have the wrong manifest directory, but still won't run in the debugger.
+
+dsshost.exe -port:50000 -tcpport:50001 -manifest:"samples/MazeSimulator/MazeSimulator.manifest.xml"
+Says invalid manifest identifier. Maybe a version problem?
+
+Nope, just have to be in the root of the MRS when you run dsshost.exe.
+Seems that it uses the current directory as the default.
+
+Had to change the filename in the code because it had the wrong path too.
+
+Office looks great.
+
+Pressed F3 to make the camera solid and blew the office apart!!!
+Then ran into a wall and it shot off into the never-never. Gravity
+does not seem to have any effect because there was one wall floating
+in space.
+
+Dashboard starts automatically, but you still have to know the damn
+port number!
+It is 50001 which is the tcpport command line parameter.
+
+See manifest. There is an additional service record:
+<ServiceRecordType>
+	<dssp:Contract>http://schemas.microsoft.com/robotics/2006/01/simpledashboard.html</dssp:Contract>
+</ServiceRecordType>
+
+Robot would not drive -- started to tilt up in the air. So I ran into
+it using the camera (with F3 turned on) and it tumbled off into space.
+G key has no effect. What is going on with Gravity?
+
+Worked on the code to add height based on pixel colour.
+Also improved the optimization code so that it would create
+large rectangle rather than ones just one row wide.
+
+When I had finished all this, gravity worked. Dunno why.
+
+24-Aug-2006:
+Posted the code on the Internet, added a post to the original
+in Channel 9, and notified Ben Axelrod via e-mail.
+
+
+Decided to try to set the colour of the blocks as well.
+
+How can you create a simple coloured block like in VRML or OpenGL?
+Material properties? Or apply a bitmap texture to a surface?
+
+Posted a question to the Newsgroup.
+
+Reply from George suggesting I look at MaterialAdvanceProperties
+and MaterialOpticalProperties.
+
+You can examine classes in VS by typing the name of the class
+into the code window and then using Go to Definition in the
+context menu. VS uses reflection to extract the property and
+method definitions. If the programmer has done the right thing,
+then there are also comments explaining how to use the methods.
+
+After much messing around and tearing of hair, I had some code
+that I thought would set the colour. However, it did not work.
+
+Posted another question to the Newsgroup.
+
+George replied that these classes are for the Phyics sim,
+not the Visual entities. Bum steer.
+
+Anyway, I had figured out how to use simple textures in the
+meantime. It is really simple:
+Create a bitmap (I made them 16x16 so I could see what I was
+doing)
+Save the bitmap into the MRS\store\media directory
+For the entity, i.e. BoxShape called box, just add:
+box.State.Assets.DefaultTexture = "bitmapname.bmp";
+
+So the Maze Simulator now has a "Lego-like" appearance!
+Pretty cool, even if I do say so myself.
+
+
+----------------------------------------------------------------
+
+Simulation Tutorial 1
+
+Started VS from command line.
+Compiled.
+Started in debugger.
+All OK. The Project Properties were correct - must be edited
+by the installation script.
+
+RoboticsCommon.dll is in bin\services and there is a reference
+in the project.
+
+Note that the Robotics Tutorial 6 shows this as a project in
+the Solution, but it does not exist. (Posting in newsgroup.)
+
+Textures have to be in store\media, e.g. sky.dds.
+
+
+----------------------------------------------------------------
+
+Simulation Tutorial 2
+
+Press F3 to make the camera solid. However, if you run into the
+robot, it tips over! Way too much "oomph!"
+
+Create a dashboard:
+bin\dsshost /port:51000 /tcpport:51001 /manifest:"config\SimpleDashboard.manifest.xml"
+
+Simulation was on 50001.
+
+Added a dashboad to the manifest.
+
+The command in the tutorial is wrong -- has an extra slash after tcpport.
+This one is correct:
+
+bin\dsshost /port:50000 /tcpport:50001 /manifest:"config\SimulationTutorial2.manifest.xml"
+
+Can get a list of the currently running services:
+http://fit10012645:50000/directory
+
+
+----------------------------------------------------------------
+
+Service Tutorial 1
+
+The created files are M08, not M06.
+
+Using the command line in the doco to run the service is wrong -- it runs the old
+service because the new manifest is not in the config directory.
+
+Class StateType is actually ServiceTutorial1State
+An instance called _state is automatically created by dssnewservice.
+
+ServiceTutorial1Service in Control Panel, not ServiceTutorial1.
+JavaScript error when I dropped the service, but it appeared to work
+after refreshing the screen. However, it was still running in the DOS
+window. Probably because the node is still running, but the service
+has stopped.
+
+
+
+
+----------------------------------------------------------------
+
+Using the Simulator
+
+Rotating with the mouse is really hard.
+
+Also, every time I start, the mouse seems back to front. Needt to be able to flip it.
+
+Need a "set me horizontal" button. With a horizon, you can move it to the
+middle but in an "office" you can't see the horizon. Besides, even a small
+error adds up over a long distance and you end up going through the floor or
+floating in mid-air.
+
+Add a camera to the Pioneer!!! How can you:
+Create a new camera
+Set camera properties, i.e. FOV, pixel resolution, etc.
+Get the camera image
+
+Posted a message to the Newsgroup with these suggestions.
+
+
+
+----------------------------------------------------------------
+
+Dashboard
+
+How about passing it parameters, or adding to a manifest, to allow
+it to automatically pick up the host and port? Then you would not
+have to mess around finding the right port.
+
+
+
+----------------------------------------------------------------
+
+September 2006 CTP update
+
+Converted the code using the tool supplied.
+
+Migrated most of the variables to the State class so that they
+can be set using a config file (Initial State). This is where
+they should have been in the first place, but the first version
+was just "quick and dirty".
+
+Added a small amount of additional code to allow for the use of
+either defined colors (using RGB) or textures. The Textures will
+override the RGB values.
+
+

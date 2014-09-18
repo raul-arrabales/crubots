@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>MSRS Maze Simulator Tutorial</title>
+    <link href="Styles/Standard.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/index.htm"><img src="Images/MSRSCodePage.jpg" alt="MSRS Code Page Home" border="0" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/MazeSimulatorBanner.gif" alt="MSRS Maze Simulator" />
+<hr />
+<p class="heading"><span class="dropcap">T</span>utorial for Maze Simulator</p>
+
+<h2>Using the Simulator</h2>
+<p>
+Run the Maze Simulator by opening a MSRS DOS Command Prompt from the Start Menu
+and then entering the command:<br />
+<tt>RunMazeSimulator</tt><br />
+NOTE: This assumes that you have correctly installed the program as per the
+Quick Start instructions in the <a href="readme.txt">readme.txt</a>.
+</p>
+<p>
+Two windows should appear:<br />
+Simulation View; and<br />
+Dashboard.
+</p>
+<h3>Simulator</h3>
+<a href="Images/SimulatorInitialView.jpg"><img src="Images/SimulatorInitialView_small.jpg" alt="Simulator View - Click for larger view" align="left" vspace="5" hspace="5" border="0" /></a>
+<p>
+You should have a look through the menus. Notice that you can
+change the rendering and turn the physics on and off. You can
+even change the gravity!
+</p>
+<p>
+You use the keyboard to move your point
+of view (the default camera) around in the simulated world.
+These keys are A, S, D and W for left, back, right and forward, or the arrow keys.
+You can also use Q and E to move up and down. (If you hold down Shift, the
+camera will move faster.)
+Try out the different keyboard commands. If you have played first-person
+shooter games then you will be familiar with these keys. You can also drag
+on the window using the mouse. This will change the orientation of the
+camera.
+</p>
+<p>
+You can't break anything, but you might get lost if you move the
+camera too far. Note that you can move the camera through walls and the floor.
+If you go "below ground" it is easy to get disoriented.
+</p>
+<p><b>NOTE:</b> You can turn on the Status Bar in the View menu. This shows
+the current location of the camera. This might be helpful. When you first
+start (as shown in the picture), the X direction is left-right, Y is up-down,
+and Z is forward-backward. The camera orientation is controlled by the Look At
+coordinates, which you can change by dragging with the mouse.</p>
+<br clear="all" />
+
+<h3>Dashboard</h3>
+<a href="Images/Dashboard.gif"><img src="Images/Dashboard_small.gif" alt="Dashboard" align="left" vspace="5" hspace="5" border="0" /></a>
+<p>
+The Dashboard is used to control the robot. The example shown here is
+my modified version of the Simple Dashboard which is included in
+the package.
+</p>
+<p>
+The main control is a "trackball"
+in the top left above the <b>Drive</b> and <b>Stop</b> button.
+Below this are the Motion Control buttons. These allow you to
+move the robot a small amount at a time. You can change the
+distance moved and angle of rotation associated with these buttons in the
+Options dialog.
+</p>
+<p>
+Firstly, you must connect to the Simulator by entering localhost as the remote
+host name and 50001 as the port. Then click on the Connect button. A list of
+available services will be displayed.
+</p>
+<p>
+Double-click on the <i>simulateddifferentialdrive</i> to select it, and then click
+on the Drive button. If it is working, you will probably notice that the Lag
+changes.
+</p>
+<p>
+Try driving the robot around by clicking on the trackball and dragging the
+cross-hairs around with the mouse. It takes a little practice to
+use the trackball because the robot has intertia and its motors take time
+to speed up and slow down.
+</p>
+<p>
+If you run the robot into a wall really hard
+you might knock it over. If this happens, the only way
+to set it upright again is by using the Edit option in the Mode
+menu of the simulation window. This is a little tricky, so you
+might prefer to restart the simulator.
+</p>
+<p>
+Note that the Articulated Arm section of the Dashboard is not applicable
+to this simulation.
+</p>
+<br clear="all" />
+
+<h2>Using the Robot View</h2>
+<p>In the Camera menu of the Simulator window you can select the Robot View which
+is called "robocam".</p>
+<a href="Images/RobotView.jpg"><img src="Images/RobotView_small.jpg" alt="Robot View - Click for larger image" vspace="5" hspace="5" align="left" border="0" /></a>
+<p>
+Note that when you have the robot view selected you cannot use the mouse or
+other keys to change the point of view in the Simulation window. Instead, you
+need to move the robot using the Dashboard.
+</p>
+<p>
+The Robot View will be stretched to fit the window. This might mean that it
+looks somewhat distorted. If you want to work in the Robot View, then it is
+probably a good idea to resize the Simulation window. Besides, you probably
+will want to have both the Robot View and the Dashboard visible on the screen
+at the same time.
+</p>
+<p>
+As an alternative to switching cameras in the main simulation window,
+you can open a new WebCam window from the Dashboard. (Double-click on
+the <i>simulatedwebcam</i> service in the list.) This gives you
+two views simultaneously -- the main camera in the simulation window and
+the robocam in a smaller WebCam window. If you resize the WebCam window,
+it will maintain the aspect ratio and not get stretched.
+</p>
+<p>
+Driving around using Robot View is not easy because you have a limited
+field of view. This might give you some idea of how difficult it is to
+navigate using computer vision.
+</p>
+<br clear="all" />
+
+<h2>Laser Range Finder (LRF)</h2>
+<p>
+If you look carefully at the walls, you will see some red dots appearing
+and disappearing. This is the Laser Range Finder.
+You can turn on the LRF display by double-clicking on the <i>simulatedlrf</i>
+service in the list of services in the Dashboard.
+</p>
+<p>
+Note that what is displayed in the Dashboard (see the picture above)
+is actually not correct.
+A Laser Range Finder scans the surrounding environment by sending out a series
+of laser beams using a rotating mirror. All of the beams are in a single
+horizontal plane. The LRF display however, uses the range information to
+draw a 3D representation, but in fact this is an extrapolation of
+2D data and it is not strictly correct.
+</p>
+<p>
+Also note that the LRF has a 180 degree field of view, but the camera has
+a field of view of only about 60 degrees. This means that the walls you see
+in the LRF display extend past the edges of what you can see in the Robot View.
+</p>
+<p>
+With the LRF display showing in the dashboard, drive the robot so that you
+can see the small black and white ball. Does it appear in the LRF display?
+No! It is too small to be visible and the laser beams pass over the top of
+it. This illustrates one of the shortcomings of a LRF.
+</p>
+
+<h2>What Next?</h2>
+<p>
+After you have driven the robot around for a few minutes, it starts to
+become boring. You will probably want to move on to the
+<a href="../Intro/Intro.htm">Intro to Autonomous Robotics</a>
+program. This program shows how the robot can explore randomly by using
+the bumpers to let the robot know when to change direction when it bumps
+into walls.
+</p>
+
+<p>
+<a href="MazeSimulator.htm">[&nbsp;Overview&nbsp;]</a>&nbsp;|&nbsp;<a href="MazeSimulatorDocumentation.htm">[&nbsp;Documentation&nbsp;]</a>
+</p>
+
+<hr />
+<div class="footer">
+Page maintained by:
+<a href="m&#97;&#105;&#108;t&#111;:T.Taylor&#64;qut&#46;edu&#46;au">T.Taylor&#64;qut.edu.au</a>
+&nbsp;&nbsp;&nbsp;Last Updated: 18-Jul-2007
+</div>
+
+</div>
+
+</body>
+</html>

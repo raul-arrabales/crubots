@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>MSRS Explorer</title>
+    <link href="Styles/Standard.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/index.htm"><img src="Images/MSRSCodePage.jpg" alt="MSRS Code Page Home" border="0" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/ExplorerBanner.gif" alt="MSRS Explorer Program" />
+<hr />
+<p class="heading"><span class="dropcap">E</span>xplorerSim Program</p>
+<p>
+This is a modified version of the sample Explorer program provided by Microsoft.
+It demonstrates how to make a robot explore its environment using
+a laser range finder (LRF) and build a map as it goes.
+The code has been changed so that it will work
+with the simulated Pioneer 3DX robot.
+NO HARDWARE IS REQUIRED! (If somebody wants to try it with a real
+Pioneer robot and let me know, that would be great. I can't afford
+a Pioneer 3DX with LRF!)
+</p>
+<p>
+<b>IMPORTANT NOTE:</b> This program requires an updated version of the 
+<a href="../DifferentialDriveTT/DiffDrive.htm">Simulated Differential Drive</a>
+that supports the DriveDistance and RotateDegrees APIs.
+Consequently, it also needs a slightly modified version
+of the <a href="../MazeSimulator/MazeSimulator.htm">Maze Simulator</a>.
+The manifest specifies my modified version of the Dashboard, although
+this can be changed to use the Simple Dashboard included
+in the MSRS distribution.
+</p>
+<h2>Background</h2>
+<p>
+Microsoft provides a program called Explorer in the directory
+&lt;MSRS&gt;samples\Misc\Explorer. However, it uses two functions
+that were not supported in the Simulated Differential Drive until
+V1.5 and therefore it could not be run in the simulator. This was
+a serious disadvantage for beginners hoping to learn about laser range
+finders and autonomous exploration.
+</p>
+<p>
+I therefore updated the Simulated Differential Drive code
+so that to implement the DriveDistance and RotateDegrees functions.
+However, you should note that these functions do not produce exact
+motions because in the simulator the robot moves in small steps
+that depend on the motor speed. It therefore tends to step past
+the desired position, i.e. turn too far and drive too far. (In the
+real world, robots never do exactly what you tell them,
+so in a sense this is realistic.)
+</p>
+<p>
+A screen shot of the program in operation is shown below.
+Notice that you can view the robot's camera in a separate window
+and the Dashboard shows a top-down map based on the laser range data.
+The Global Map window is not shown in this diagram.
+</p>
+<p align="center">
+<img src="Images/FullScreen2.jpg" />
+</p>
+<p>
+In order to get the Explorer program to work, you have to use several different projects:
+</p>
+<ul>
+<li>ExplorerSim</li>
+<li>Simulated Differential Drive TT</li>
+<li>Maze Simulator</li>
+<li>Dashboard</li>
+</ul>
+<p>
+This is an integrated set of programs. You must use only the
+versions available on this page. If you mix older versions of these
+projects then the Explorer will not work.
+To make it easier to install, all of these projects are supplied
+in a single ZIP file.</p>
+
+
+<h3>What it does</h3>
+<p>
+Basically, the ExplorerSim program controls a simulated Pioneer 3DX robot which
+has a laser range finder on top of it. The laser range finder is used
+to determine the direction of the most free space, and
+the robot heads off in this direction. You will see it stop and
+&quot;look around&quot; from time to time.
+</p>
+<p>
+Unfortunately, the exploration algorithm is not ideal. (I did not write
+it, so don't blame me! I will provide better algorithms in later
+programs.) The robot
+will often return to areas it has previously explored (because
+it does not use the map that it builds)
+and sometimes it will oscillate from side to side trying to decide
+where to go next. Much more work would need to be done to use this
+program for real exploration. However, it does illustrate many
+points about exploring and how to use a laser range finder. It is
+certainly better than my basic Intro program which relies on
+bumpers because in the Explorer the robot does not run into walls!
+</p>
+<p>
+As the robot wanders around, it builds a map of what it sees
+with the LRF. This is displayed in a separate window:<br />
+<img src="Images/Map-Counting.gif" vspace="5" hspace="5" /><br />
+Note that the map is not used for exploration in this version
+of the program. A future program will demonstrate how to
+incorporate the map into an exploration algorithm.
+</p>
+<p>
+Three different methods have been implemented for constructing the
+map: Overwrite, Counting and Bayes Rule. The results however are
+very similar. See the <a href="ExplorerDocumentation.htm">Documentation page</a>
+for more details.
+</p>
+<p>
+Note that this is a simulation, so the robot always knows
+exactly where it is. Therefore it creates quite good maps.
+This is not the case in the real world because the robot
+has to estimate its position.
+</p>
+
+<h2>Available Resources</h2>
+<h3>Documentation</h3>
+<p>
+A <a href="ExplorerDocumentation.htm">Documentation page</a> is provided with
+instructions on how to install and run the program.
+These web pages are also included in the ZIP file so you don't have to go back
+to the Internet all the time.
+You should also read the <a href="readme.txt">readme.txt</a> which is included in the ZIP file.
+</p>
+<h3>Tutorial</h3>
+<p>
+There is a brief <a href="ExplorerTutorial.htm">Tutorial</a>.
+However, it does not explain the program in detail. You can use
+the software without having to make any changes to the code. You should
+try the Microsoft Simulation Tutorials on which this program is based.
+</p>
+<h3>Software</h3>
+<p>This software might be developed further. 
+This version was built with V1.5 it will not work with other versions.<br />
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/Downloads/QUTJul2007.zip">QUT MSRS Apps</a> 18-Jul-2007<br />
+<br />
+You must unzip the file into your MSRS root directory. It will not
+overwrite any of the Microsoft code. All the services are located
+in the Apps\QUT directory under the MSRS root. Please read the
+installation instructions on the <a href="ExplorerDocumentation.htm">Documentation page</a> carefully.
+</p>
+<p>
+Obviously, you need the Microsoft Robotics Studio software as well.
+At present this must be version 1.5.
+</p>
+
+<h2>Legal Stuff</h2>
+<p>
+This code is based very heavily on the Microsoft Explorer sample
+program. It is not warranted to be
+suitable for any purpose other than playing around with MSRS. There
+are known bugs, and it is not intended as a definitive example of
+how to write robotic systems. If you use it on a real Pioneer
+robot and your robot crashes into walls, that's too bad -- change
+the code!
+</p>
+
+<p>
+<a href="ExplorerDocumentation.htm">[&nbsp;Documentation&nbsp;]</a>&nbsp;|&nbsp;<a href="ExplorerTutorial.htm">[&nbsp;Tutorial&nbsp;]</a>
+</p>
+
+<hr />
+<div class="footer">
+Page maintained by:
+<a href="m&#97;&#105;&#108;t&#111;:T.Taylor&#64;qut&#46;edu&#46;au">T.Taylor&#64;qut.edu.au</a>
+&nbsp;&nbsp;&nbsp;Last Updated: 18-Jul-2007
+</div>
+
+</div>
+
+</body>
+</html>

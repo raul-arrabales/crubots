@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>MSRS Dashboard Service</title>
+    <link href="Styles/Standard.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/index.htm"><img src="Images/MSRSCodePage.jpg" alt="MSRS Code Page Home" border="0" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/DashboardBanner.gif" alt="Dashboard" />
+<hr />
+<p class="heading"><span class="dropcap">D</span>ashboard Configuration</p>
+<p>
+I was using the Simple Dashboard a lot because I used
+it to drive around simulated robots and my Lego NXT. It got to be quite
+annoying having to re-enter the same connection parameters every time.
+So I have updated the code to save a config file and use an InitialStatePartner
+to reload saved settings on startup. Since then I have also added support
+for a top-down view of the Laser Range Finder and a WebCam window.</p>
+<img src="Images/Dashboard.gif" align="left" hspace="5" vspace="5" />
+<p>
+Here is what the new interface looks like. By default the
+Laser Range Finder and the Articulated Arm are not displayed, so it will be a much smaller
+window. It also remembers where you last placed it on the screen so that it will
+always pop up in the same position. The connection parameters and the log settings are remembered as well.
+</p>
+<p>
+NOTE: You must select the <b>Save Settings</b> option in the File menu to save the settings.
+This is intentional because I often change the settings temporarily and so I don't
+want them to be remembered every time I exit from the program.
+</p>
+<p>
+When you save the settings, a file called Dashboard.Config.xml will be written
+into the Apps/QUT/Config directory. A sample config file is included in the ZIP file.
+</p>
+<p>
+There are Motion Control buttons in the middle-left of the Dashboard
+that can be used to move the robot. These use the TranslateDistance
+and RotateDegrees functions of the Differential Drive. For these to
+work in simulation, you should use my modified version of the
+Simulated Differential Drive which is included in the package.
+You can adjust the distance and the amount of rotation in the Options
+dialog.
+</p>
+<p>
+At the bottom of the window you can see a new display option for the
+Laser Range Finder data. This gives you a top-down view where black
+pixels represent obstacles, white is free space and grey is
+unknown. This is the convention that is commonly used in &quot;occupancy
+grids&quot;. (The original 3D view is still available and can be
+selected in the Options dialog.)
+</p>
+<br clear="all" />
+<p>
+&nbsp;
+</p>
+<p>
+In the list of available services you can see that there is a WebCam listed.
+The Dashboard can display a separate window to view the video from a
+WebCam attached to the robot. An example is shown below from the
+Maze Simulator:<br />
+<img src="images/WebCamView.jpg" hspace="5" vspace="5" /><br />
+Notice the red laser hits on the nearby obstacle. There are no laser
+hits on the ball because it is not high enough. If you minimize
+the simulation window these laser updates will stop.
+</p>
+
+<h3>Option Settings Dialog</h3>
+<img src="Images/DashboardOptions.gif" align="left" hspace="5" vspace="5" />
+<p>
+There are several different settings available in the Options Dialog.
+They can be used to control how the "trackball" works.
+This makes it easier to control the robot.
+</p>
+<p>
+The scale factors allows you to control the speed of the robot as
+you move the trackball further from the center. For example, you
+might not want the robot to rotate at full speed because it is too fast
+to control easily. Therefore you can set the Rotate Scale Factor
+to 0.5 (half speed) or something suitable.
+</p>
+<p>
+Note that you can reverse the direction of the trackball if you want
+to fly your robot like a plane. Enter a negative value for the
+Translate Scale Factor or Rotate Scale Factor to reverse the directions.
+</p>
+<p>The "Dead Zone" is an area either side of the horizontal and vertical
+centrelines of the trackball where the value will be zero. This means
+that you do not have to be so exact when you move the cursor. The
+dead zone makes it easier to drive in a straight line and to rotate
+on the spot.
+</p>
+<p>
+There is a small problem with the dead zone that can cause the robot
+to rotate in the wrong direction if you move the cursor too far below
+the horizontal center line, i.e. just outside the dead zone. This same
+problem exists in the original Simple Dashboard.
+</p>
+<p>Notice that you can turn the display of the LRF and Articulated Arm
+on or off here. The Dashboard will adjust its size accordingly. This
+makes it easier to fit on the screen at the same time as the Simulator
+for example.
+</p>
+<p>If you are using the LRF, then you might want to set the Robot Width
+(which is in millimeters). This will display any obstacle immediately in
+front of the robot in red, rather than the normal blue-grey. Then it is
+easier to see if the robot will fit through a gap. (This feature was
+invented by Ben Axelrod.)</p>
+<p>
+If you check the Display Map option, then a top-down view will be
+displayed as in the diagram above. If you uncheck it, the original
+3D view is displayed. You can limit the maximum range used for the
+laser data. For the simulated Pioneer robot, the maximum value is
+8192 millimeters, but you can reduce this to limit what the laser sees.
+</p>
+<p>
+The purpose of the Motion Commands options should be obvious. These
+parameters are for the Motion Control buttons.
+</p>
+<p>
+Due to a bug in the original simulated WebCam, I added a timer.
+However, this should not be necessary in V1.5. Don't set the
+timer interval too low or your computer might not be able to
+keep up.
+</p>
+<br clear="all" />
+<p>
+There is nothing particularly new or exciting about this code.
+However, I have documented what I did. So anyone who might wonder about
+how to add a saved state to a service, have a look at my
+<a href="Readme-InitialStateForDashboard.txt">notes</a> file. (This is
+included in the ZIP. It is just plain text.) The
+WebCam code was basically copied from the new BlobTrackerCalibrate
+example in MSRS V1.5.
+</p>
+
+<h2>Available Resources</h2>
+<h3>Software</h3>
+<p>The following version is available now:<br />
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/Downloads/QUTJul2007.zip">QUT MSRS Apps</a> 18-Jul-2007<br />
+This version was built with the version 1.5 release of MSRS.
+</p>
+<p>
+The ZIP contains the entire package, including the Dashboard.
+Unzip the file into the root directory of your MSRS installation.
+It will not conflict with any MSRS services. For more detailed
+installation instructions see the Readme.txt.
+</p>
+
+<h2>Legal Stuff</h2>
+<p>
+This code is a hack to the Microsoft Simple Dashboard. I don't
+claim any rights to the code. It is not intended as a definitive example of
+how to add an InitialStatePartner to a service, or to display data from
+a WebCam, but it does work.
+</p>
+
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/index.htm">[&nbsp;MSRS Code Page&nbsp;]</a>
+
+<hr />
+<div class="footer">
+Page maintained by:
+<a href="m&#97;&#105;&#108;t&#111;:T.Taylor&#64;qut&#46;edu&#46;au">T.Taylor&#64;qut.edu.au</a>
+&nbsp;&nbsp;&nbsp;Last Updated: 18-Jul-2007
+</div>
+
+</div>
+
+</body>
+</html>

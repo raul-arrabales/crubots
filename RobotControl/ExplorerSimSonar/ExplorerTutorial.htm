@@ -1,0 +1,589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>MSRS ExplorerSim Tutorial</title>
+    <link href="Styles/Standard.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/index.htm"><img src="Images/MSRSCodePage.jpg" alt="MSRS Code Page Home" border="0" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/ExplorerBanner.gif" alt="MSRS Explorer" />
+<hr />
+<p class="heading"><span class="dropcap">T</span>utorial for ExplorerSim</p>
+
+<h2>Using the Simulator</h2>
+<p>
+Run the ExplorerSim by opening a MSRS DOS Command Prompt from the Start Menu
+and then entering the command:<br />
+<tt>RunExplorerSim</tt><br />
+Alternatively, you can locate the Explorer Simulation shortcut by
+browsing to the &lt;MSRS&gt; directory in Windows Explorer and then
+double-clicking on it to start the program.<br />
+NOTE: This assumes that you have correctly installed the program as per the
+Quick Start instructions in the <a href="readme.txt">readme.txt</a>.
+</p>
+<p>
+Three windows should appear:
+</p>
+<ul>
+<li>Simulation View; </li>
+<li>Dashboard; and</li>
+<li>Map.</li>
+</ul>
+
+<h2>Configuration</h2>
+<p>
+A configuration file is supplied in the package and is
+stored in Apps\QUT\Config\ExplorerSim.Config.xml.
+An example of a config file is shown below:
+</p>
+<tt>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />
+&lt;State xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:d="http://schemas.microsoft.com/xw/2004/10/dssp.html" xmlns="http://schemas.microsoft.com/robotics/2007/06/explorersim.html"&gt;<br />
+&nbsp;&nbsp;&lt;Countdown&gt;0&lt;/Countdown&gt;<br />
+&nbsp;&nbsp;&lt;LogicalState&gt;Unknown&lt;/LogicalState&gt;<br />
+&nbsp;&nbsp;&lt;NewHeading&gt;0&lt;/NewHeading&gt;<br />
+&nbsp;&nbsp;&lt;Velocity&gt;0&lt;/Velocity&gt;<br />
+&nbsp;&nbsp;&lt;Mapped&gt;false&lt;/Mapped&gt;<br />
+&nbsp;&nbsp;&lt;MostRecentLaser&gt;2007-07-14T18:25:32.2205888+10:00&lt;/MostRecentLaser&gt;<br />
+&nbsp;&nbsp;&lt;X&gt;0&lt;/X&gt;<br />
+&nbsp;&nbsp;&lt;Y&gt;0&lt;/Y&gt;<br />
+&nbsp;&nbsp;&lt;Theta&gt;0&lt;/Theta&gt;<br />
+&nbsp;&nbsp;&lt;DrawMap&gt;true&lt;/DrawMap&gt;<br />
+&nbsp;&nbsp;&lt;DrawingMode&gt;Counting&lt;/DrawingMode&gt;<br />
+&nbsp;&nbsp;&lt;MapWidth&gt;24&lt;/MapWidth&gt;<br />
+&nbsp;&nbsp;&lt;MapHeight&gt;18&lt;/MapHeight&gt;<br />
+&nbsp;&nbsp;&lt;MapResolution&gt;0.05&lt;/MapResolution&gt;<br />
+&nbsp;&nbsp;&lt;MapMaxRange&gt;7.99&lt;/MapMaxRange&gt;<br />
+&nbsp;&nbsp;&lt;BayesVacant&gt;160&lt;/BayesVacant&gt;<br />
+&nbsp;&nbsp;&lt;BayesObstacle&gt;96&lt;/BayesObstacle&gt;<br />
+&lt;/State&gt;<br />
+</tt>
+<p>
+Some of the values in the config file are state information
+that is only valid when the program is running, such as
+the X, Y and Theta which are the pose. Other values are
+for debugging.
+</p>
+<p>
+If you set DrawMap to false, the Map window
+will not be created when the program starts up.
+The value of DrawingMode determines how the map
+is drawn and can be Overwrite, Counting or BayesRule.
+These are explained below.
+</p>
+<p>
+You can change the size of the map, but it needs to be
+large enough for the simulated environment. It is also
+possible to change the resolution of the map and the
+maximum range of the laser.
+</p>
+<p>
+The resolution affects the
+quality of the map. The range will affect how quickly
+it maps the whole environment. In reality, reducing the
+range will affect how well the robot can perform
+SLAM (Simultaneous Localization and Mapping). However,
+this program does not need SLAM because the pose
+information from the Simulator is quite accurate.
+</p>
+
+<h3>Simulator</h3>
+<a href="Images/SimView.jpg"><img src="Images/SimView_small.jpg" alt="Simulator View - Click for larger view" align="left" vspace="5" hspace="5" border="0" /></a>
+<p>
+You should have a look through the menus. Notice that you can
+change the rendering and turn the physics on and off. You can
+even change the gravity!
+</p>
+<p>
+You use the keyboard to move your point
+of view (the default camera) around in the simulated world.
+These keys are A, S, D and W for left, back, right and forward, or the arrow keys.
+You can also use Q and E to move up and down. (If you hold down Shift, the
+camera will move faster.)
+Try out the different keyboard commands. If you have played first-person
+shooter games then you will be familiar with these keys. You can also drag
+on the window using the mouse. This will change the orientation of the
+camera.
+</p>
+<p>
+You can't break anything, but you might get lost if you move the
+camera too far. Note that you can move the camera through walls and the floor.
+If you go "below ground" it is easy to get disoriented.
+</p>
+<p><b>NOTE:</b> You can turn on the Status Bar in the View menu. This shows
+the current location of the camera. This might be helpful. When you first
+start (as shown in the picture), the X direction is left-right, Y is up-down,
+and Z is forward-backward. The camera orientation is controlled by the Look At
+coordinates, which you can change by dragging on the Simulator window
+with the mouse.
+</p>
+<p>
+There are two cameras in the Simulator: the default one and
+one called robocam. The default camera gives you the top-down
+view and the robocam is mounted on top of the robot. You
+can switch between them, but it is actually easier to use
+the Dashboard to display the robocam view in a separate window,
+as explained below.
+</p>
+<br clear="all" />
+
+<h3>Dashboard</h3>
+<a href="Images/DashboardMap.gif"><img src="Images/DashboardMap_small.gif" alt="Dashboard - Click for larger view" align="left" vspace="5" hspace="5" border="0" /></a>
+<p>
+The Dashboard is used to control the robot and to display
+information. In the case of the ExplorerSim, the program
+actually controls the robot so you don't have to do anything!
+</p>
+<p>
+Firstly, you must connect to the Simulator by entering localhost as the remote
+host name and 50001 as the port. (This information should already
+appear in the Dashboard if you installed ExplorerSim correctly.)
+Then click on the <b>Connect</b> button. A list of
+available services will be displayed.
+</p>
+<p>
+Double-click on the <i>simulateddifferentialdrive</i> to select it, and then click
+on the <b>Drive</b> button. If it is working, you will probably notice that the Lag
+changes.
+</p>
+<p>
+The main control is a "trackball" in the top left above the <b>Drive</b> and <b>Stop</b> buttons.
+You can drag on the trackball with a mouse to move the robot. Alternatively,
+if you have a joystick you can use that. I have successfully use a
+Logitech USB joystick.
+</p>
+<p>
+There is also a set of Motion Control buttons that allow you to move
+the robot forward or backwards and turn left or right. The Motion
+Control buttons execute a particlar motion and then stop the robot.
+They do not turn the motors on and leave them running like the
+Drive-By-Wire example in the Microsoft tutorials. This is much safer
+with a real robot because it can't run away from you. However, for
+these buttons to work I had to modify the Simulated Differential
+Drive service to make it support the DriveDistance and RotateDegrees
+functions. This was essential for getting the Explorer service to
+work and in fact the buttons are really just there for testing because
+it is a painful way to drive a robot around!
+<br clear="all" />
+</p>
+<h4>Using the Robot WebCam View</h4>
+<p>
+In the Dashboard services list, double-click on the <i>simulatedwebcam</i> to select it.
+A new window should appear as shown below:
+</p>
+<img src="Images/WebCamView.jpg" alt="Robot View" vspace="5" hspace="5" align="left" border="0" />
+<p>
+The advantage of the WebCam View window is that you can see what
+the robocam camera sees and at the same time watch the top-down
+view in the Simulator.
+</p>
+<p>
+The WebCam View shown here corresponds to the Simulator
+view at the top of this page. Notice that there is a large
+yellow block in the foreground and a black and white ball
+just off-centre.
+</p>
+<p>
+Driving around using WebCam View is not easy because you have a limited
+field of view. This might give you some idea of how difficult it is to
+navigate using computer vision. However, this is not the purpose of
+ExplorerSim which uses a LRF, not the camera.
+</p>
+<p>
+In the Option settings (shown above), you can change the
+update interval for the camera. I recommend keeping it greater
+than 100ms. In fact, even 250ms gives reasonable performance.
+If you set it too low, i.e. too fast, the computer might not
+be able to keep up.
+</p>
+<br clear="all" />
+
+<p>
+&nbsp;
+</p>
+<h4>Dashboard Options</h4>
+<p>
+Note that the Articulated Arm section of the Dashboard is not applicable
+to this simulation. In my version of the Dashboard you can turn this
+off so that it is not displayed.
+</p>
+<p>
+There are several option settings that you can change
+in the Dashboard. Select Tools \ Options to see the dialog
+as shown below:
+</p>
+<img src="Images/DashboardOptions.gif" />
+<p>
+Notice that you can change the parameters for the Motion
+Control buttons to adjust the number of degrees turned,
+or the distance travelled. You can also change the speed.
+However, you should be aware that the faster you make the
+robot go, the more it is likely to overrun the requested
+angle or distance. This is because of the way the simulator
+works, but in fact it also happens in real life if the
+control program cannot respond quickly enough to data
+coming from the robot's wheel encoders.
+</p>
+
+<h3>Map Window</h3>
+<p>
+While the robot is wandering around, it uses the data from
+the Laser Range Finder (LRF) to draw a global map. There are a
+couple of different methods which are explained below. Note
+that for this program that maps are quite accurate because
+it is using a simulation. However, if the same techniques
+were applied in the real world the results would not be
+anywhere near as good.
+</p>
+
+<h2>Laser Range Finder (LRF) Data</h2>
+<p>
+Double-click on the <i>simulatedlrf</i> in the Dashboard
+to select the LRF.
+If you look carefully at the walls in the Simulator, you will see
+some red dots appearing and disappearing. These are the laser hits.
+</p>
+<p>
+The settings in the Dashboard.Config.xml file supplied with
+the ExplorerSim are configured for the Dashboard to display a top-down
+map. (You can change this back to the 3D view in Tools \ Options.)
+A blown-up view of a map is shown below. This map corresponds to the
+WebCam View above. The robot is located 
+at the bottom edge in the centre of the map.
+</p>
+<img src="Images/Map.gif" />
+<p>
+In the map there are gaps in the white area (free
+space) and between the black dots (obstacles). This is because
+the map was created by tracing "rays" out from the robot.
+Laser beams are very thin! It is common practice to fill
+in these gaps, but I wanted to make the point that the
+LRF actually does not give you any information in
+between laser rays, even though they are only half a
+degree apart.
+</p>
+<p>
+Notice how the laser hits gradually spread out along
+the wall in the lower right of the map. Eventually one
+of the laser rays runs straight along the wall misses it
+completely until it runs into the wall in the upper right.
+</p>
+<p>
+Also notice at the top of the map that
+the white area stops but there is no black border.
+This indicates that the range of the laser was
+exceeded, i.e. there was no hit within the laser's
+range (in this case about 8 metres). It is hard to
+tell in the map, but the edge of the white area should
+follow an arc of a circle with radius 8 metres.
+</p>
+<p>
+Anything that the laser could not see is grey. The large yellow block
+that is close to the robot casts a "shadow" because the
+laser can't see through it.
+</p>
+<p>
+In the original Microsoft Simple Dashboard the LRF data was
+displayed as a 3D view as shown in the picture below.
+What is displayed is actually not correct.
+A Laser Range Finder scans the surrounding environment by sending out a series
+of laser beams using a rotating mirror. All of the beams are in a single
+horizontal plane. The LRF display however, uses the range information to
+draw a 3D representation, but in fact this is an extrapolation of
+2D data and it is not correct.
+</p>
+<a href="Images/3DLRF.gif"><img src="Images/3DLRF_small.gif" border="0" /></a>
+<p>
+Look carefully at the WebCam View and compare it to the
+LRF 3D view. You can see a small black and white ball near the middle of
+the WebCam window. Does it appear in the LRF display?
+No! It is too small to be visible because the laser beams pass over the top of
+it. This illustrates one of the shortcomings of a LRF.
+</p>
+<p>In fact, in the 3D it appears as though there is no wall in the
+far distance near the
+centre of the image. This is because the maximum range of the laser
+was exceeded, and it can be misleading.
+</p>
+<p>
+Also note that the LRF has a 180 degree field of view, but the camera has
+a field of view of only about 60 degrees. This means that the walls you see
+in the LRF display extend past the edges of what you can see in the WebCam View.
+</p>
+
+<h3>Building Occupancy Grid Maps</h3>
+<p>
+An Occupancy Grid is a type of map that breaks the world up into
+a regular grid of cells. Each cell contains a value that is the
+probability that it is occupied. Hence the name Occupancy Grid.
+Occupancy Grids are easy to interpret (once you understand what
+the colours mean) because they show a top-down view of the world.
+</p>
+<p>
+If you always knew the exact pose (position and orientation) of the
+robot, then you could simply draw the LRF data directly into a large map
+(called the global map). Eventually you would have a complete map
+of the robot's environment. In practice, the robot's pose is
+uncertain and you have to estimate it. However, we are dealing
+with a simulation so we know exactly where the robot is at
+all times.
+</p>
+<p>
+There are three different mapping method implemented: Overwrite,
+Counting and Bayes Rule.
+You can try out the various methods by editing the config file
+for ExplorerSim and changing the value in the DrawingMode
+tag. Note that you must enter BayesRule (with no space) if you
+want to use Bayes Rule.
+</p>
+<h4>Overwrite Method</h4>
+<p>
+The simplest option is to overwrite the cells in the
+global map with new data from the LRF as it arrives. Each ray
+in a laser scan is a distance measurement to where the laser
+hit an obstacle. You can draw free cells 
+(white) into the map along each ray up to the distance where the
+laser hit an obstacle, and put an obstacle (black) in the map at this point.
+If the range measurement
+exceeds the maximum range of the laser, you draw the free space, but
+there is no obstacle at the end of the ray. (This is sometimes
+called a &quot;miss&quot; because the laser did not hit anything.)
+</p>
+<p>
+This approach is called the Overwrite
+method in this documentation. An example of the output is shown below:<br />
+<img src="Images/Map-Overwrite.gif" vspace="5" hspace="5" />
+</p>
+<p>
+Notice in the map that there are &quot;shadows&quot; behind some
+of the obstacles. This is because the laser can only see in straight
+lines, not around corners! So there are some areas that it has not
+yet seen behind the obstacles in the map above.
+</p>
+<p>
+Also notice that some of the
+white areas do not end in black (obstacles) which indicates that
+the maximum range of the laser was exceeded. In fact, if you look
+very closely you should see that the ends of these white regions
+are short curved segments because the maximum range of the laser
+is a semi-circle in front of the robot.
+</p>
+<p>
+If you are not exactly sure where the robot is,
+the Overwrite method will introduce errors into the map. It will
+simply ignore anything that is already there and write over the
+top of it. If the robot's pose is incorrectly estimated, then
+the LRF data will be written into the wrong place and might
+wipe out previous data which was actually correct!
+</p>
+<p>
+As mentioned above, occupancy grids are supposed to contain
+probabilities. The Overwrite method only has three values:
+Unknown (grey -- the whole map starts out like this), Free (White) or
+Occupied (Black). This is not a range of probabilities.
+</p>
+<h4>Counting Method</h4>
+<p>
+The next method is called the Counting method. In this approach,
+the values in the grid cells are updated using each ray from
+a laser scan. Along a laser ray, which corresponds to free space,
+the cell values are incremented. At the end of a laser ray (an
+obstacle) the cell value is decremented. If the robot sees the
+same cells often enough, they will eventually become either fully
+white or black. (Any cell that the laser cannot reach will remain grey.)
+</p>
+<p>
+The advantage of this approach is that it takes some time
+before the map cells reach the extreme values. If the robot's
+pose is incorrectly estimated for only a couple of scans,
+then it does not have much effect on the map. When the pose
+once again becomes correct, then any incorrect information
+will eventually be corrected. In fact, the robot sometimes
+stops abruptly and in the process it tilts forward. This
+causes the laser to see the ground in front of the robot
+and temporarily gives bad range data.
+</p>
+<p>
+NOTE: In this program, the cell values are represented as
+bytes. That means they range from 0 to 255. Incrementing
+and decrementing by one is reasonable for such a small range of
+values. However, you could argue that incrementing or
+decrementing by 10 would make more sense. It would
+certainly make the map &quot;develop&quot; faster.
+In effect, the value you use indicates how certain you
+are of the data. If you used an increment of 255 then
+you would have the Overwrite method!
+</p>
+<p>
+An example of a map produced using the Counting method is
+shown below. Notice that there are areas in different
+shades of grey which indicates that the robot has only
+seen them a few times and is not yet completely confident
+that they are free space.<br />
+<img src="Images/Map-Counting.gif" vspace="5" hspace="5" />
+</p>
+<h4>Bayes Rule</h4>
+<p>
+So far we have looked at a brute force approach (Overwrite)
+and a simplistic method related to probabilities (Counting).
+In the field of Probabilistic Robotics, however, the values in the
+grid cells are related more closely to the actual
+probabilities by using a Sensor Model.
+A Sensor Model relates the probability of a particular cell being
+occupied to the sensor reading.
+</p>
+<p>
+For this program, a very simple sensor model is used.
+It consists of a probability, expressed in the range
+0-255, that cells are empty along a laser ray and the
+probability that the last cell (where the &quot;hit&quot;
+occurs) is occupied.
+</p>
+<p>
+Compared to other sensors, LRFs are not very noisy.
+Furthermore, the typical error in an LRF measurement
+is only 1 or 2cm. If the grid size is larger than this,
+then there is not much point including a Gaussian
+distribution around the location of the hit because
+it will nearly all be within the one cell.
+</p>
+<p>
+There is a small, but finite, probability that the laser
+will not see an obstacle. In this case it returns a miss
+when it should have returned a hit. We will ignore this.
+</p>
+<p>
+As new information
+arrives from the LRF, it needs to be combined with the
+information in the existing map. This can be done using
+Bayes Rule which is a way of taking new probability
+data and combining it with previous data.
+</p>
+<p>
+The new LRF scan is first written to a local map. This
+map is then combined with the global map by applying
+Bayes Rule on a cell-by-cell basis. The resulting map
+looks like the following:<br />
+<img src="Images/Map-Bayes.gif" vspace="5" hspace="5" />
+</p>
+<p>
+Notice the areas in different shades of grey in the bottom
+of the map. This is a result of successive laser scans that
+overlap. Eventually the robot will see the same area
+enough times to turn the area white. The values that are
+used for updating the map can be set in the config file
+using the BayesVacant and BayesObstacle tags.
+</p>
+<p>
+There is not much difference in the resulting map. The main
+difference is only visible during the creation of the map
+when areas will gradually change from grey to white. You
+can change the DrawingMode to BayesRule and watch what
+happens.
+</p>
+
+<h3>The Real World</h3>
+<p>
+Because this is a simulation, the maps that are produced are
+much better quality than for a real robot. However, it is
+possible that the simulator will sometimes generate slightly
+incorrect information on the pose of the robot (the location
+or orientation). This can happen sometimes when you are manipulating
+the simulation window, such as zooming or scrolling around
+using the mouse. In that case you might see some errors
+creeping into the map. To correct these errors, a process
+called SLAM (Simultaneous Localization and Mapping) is
+required. This is beyond the scope of this simple example,
+but it will be covered in a future example.
+</p>
+<p>
+Also note that there are quantization errors that are
+introduced by the grid. Because the laser beams often do
+not line up exactly with the grid, there can be &quot;jaggies&quot;
+-- a stepping effect -- when the rays are drawn into the map.
+(This is a well-known problem in computer graphics.) It also results
+in walls that have little bits of &quot;fuzz&quot; due to roundoff errors.
+</p>
+<p>
+You can actually change the size of the grid in the config file.
+It is the field called MapResolution and is in meters, so the
+value above of 0.05 means 5 centimeters. Notice too that you
+can change the size of the map (MapWidth and MapHeight).
+</p>
+<p>
+LRFs typically have an accuracy of 1 or 2cm. Therefore a value
+of 5cm for the grid size is reasonable. Any errors will tend
+to be inside the same cell. (Obviously, this is not the case
+if the reading is on a cell boundary, but in general the
+distance measurements will fall inside a cell.)
+</p>
+<p>
+Another constraint on the size of the grid is the size of
+the robot. I suggest that the grid should be an order of
+magnitude less than the size of the robot (roughly one tenth
+of the robot's size).
+Otherwise, the map will not be accurate enough for the
+robot to navigate reliably. For instance, assume you used a grid
+size of 1 meter (100cm). Narrow corridors might then
+disappear completely from the map!
+</p>
+<p>
+The maximum range of the laser affects how quickly the map
+will be populated. You can change the MapMaxRange in the config
+file. Real lasers have different ranges depending on their
+technical specifications. More expensive lasers can generally
+see further, even up to 100 meters!
+</p>
+<p>
+The greater the range, the more information that is contained
+in each laser scan. This is important for SLAM because it
+needs to match new information to the existing map in order
+to determine the robot's pose (a process called localization)
+before it draws the new data into the map.
+Obviously, if the laser has only a
+very short range then it is very hard for the robot to tell
+where it is.
+Imagine walking around while you are always looking down at the
+ground. It is hard to get your bearings! 
+</p>
+<h2>What Next?</h2>
+<p>
+After you have watched the robot driving around for a while, it starts to
+get boring, especially as it is not very smart and often backtracks
+or gets stuck oscillating backwards and forwards.
+You will probably want to try changing the code to improve
+the exploration algorithm. (A new version of the Explorer
+will be available later that uses a better exploration
+approach.)
+</p>
+<p>
+When you look at the code, you will find
+that it is mostly driven by the LRF updates. It actually counts
+LRF updates as very simple form of timer in order to allow the
+robot to complete motions like rotations. It is a very simple
+"state machine" that executes a variety of different operations
+depending on the distance to the nearest obstacle from the LRF data.
+</p>
+<p>
+Before diving into the code however, you should make sure that
+you have done the tutorials provided by Microsoft. They help
+you to understand the MSRS environment. The ExplorerSim program
+helps you to get started because you do not have to learn how to
+use the Simulator and you don't need a real robot.
+</p>
+
+<p>
+<a href="Explorer.htm">[&nbsp;Overview&nbsp;]</a>&nbsp;|&nbsp;<a href="ExplorerDocumentation.htm">[&nbsp;Documentation&nbsp;]</a>
+</p>
+
+<hr />
+<div class="footer">
+Page maintained by:
+<a href="m&#97;&#105;&#108;t&#111;:T.Taylor&#64;qut&#46;edu&#46;au">T.Taylor&#64;qut.edu.au</a>
+&nbsp;&nbsp;&nbsp;Last Updated: 18-Jul-2007
+</div>
+
+</div>
+
+</body>
+</html>

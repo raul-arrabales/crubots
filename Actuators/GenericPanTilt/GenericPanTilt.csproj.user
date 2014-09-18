@@ -1,0 +1,14 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartAction>Program</StartAction>
+    <StartWorkingDirectory>H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\</StartWorkingDirectory>
+    <StartProgram>H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\bin\dsshost.exe</StartProgram>
+    <StartArguments>/p:50000 /t:50001 /m:"packages/crubots/Actuators/GenericPanTilt/GenericPanTilt.manifest.xml"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartAction>Program</StartAction>
+    <StartWorkingDirectory>H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\</StartWorkingDirectory>
+    <StartProgram>H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\bin\dsshost.exe</StartProgram>
+    <StartArguments>/p:50000 /t:50001 /m:"packages/crubots/Actuators/GenericPanTilt/GenericPanTilt.manifest.xml"</StartArguments>
+  </PropertyGroup>
+</Project>

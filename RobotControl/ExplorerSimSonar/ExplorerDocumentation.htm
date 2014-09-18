@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>MSRS ExplorerSim Documentation</title>
+    <link href="Styles/Standard.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/index.htm"><img src="Images/MSRSCodePage.jpg" alt="MSRS Code Page Home" border="0" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Images/ExplorerBanner.gif" alt="MSRS Explorer" />
+<hr />
+<p class="heading"><span class="dropcap">D</span>ocumentation for ExplorerSim</p>
+<h2>Background</h2>
+<p>
+The ExplorerSim uses the <a href="../MazeSimulator/MazeSimulator.htm">Maze Simulator</a> to create
+a simple block world
+with a Pioneer 3DX robot and Laser Range Finder (LRF) in the MSRS Simulator.
+(If you are not familiar with the Maze Simulator, please read
+its documentation.) When it starts up, the ExplorerSim sends the
+robot wandering around its environment. It uses the LRF data to
+try to find areas of free space and so that it does not bump into walls.
+The program also builds a Global Map. However, it does not use this
+map for exploration.
+</p>
+<p>
+This page contains basic instructions for using the ExplorerSim program. Please read through
+the whole page before you attempt to install the program. Most of your questions
+should be answered by this page.
+You should also read the <a href="readme.txt">readme.txt</a> file that comes
+with the code in the ZIP file.
+</p>
+<h2>Requirements and Installation</h2>
+<p>
+To get started, you need to install the Microsoft Robotics Studio on your PC.
+It is available for free for non-commercial use from the
+<a href="http://msdn.microsoft.com/robotics/downloads/">Download Site</a>.
+This version of the ExplorerSim requires the V1.5 release (from July 2007).
+</p>
+<p>
+You will need Visual Studio 2005 or Visual C# Express Edition to re-compile
+the code, but since there is not much
+point in using a Robotics Software Development Kit (SDK) without a compiler,
+I assume that you already have one of these installed.
+</p>
+<p>
+Download the 
+<a href="http://sky.fit.qut.edu.au/~taylort2/MSRS/Downloads/QUTJul2007.zip">QUT MSRS Apps ZIP file</a>.
+Unzip the file into your &lt;MSRS&gt; directory, which should
+probably be:<br />
+<tt>C:\Microsoft Robotics Studio (1.5)</tt><br />
+Notice that my MSRS is installed on the C: drive. If yours is on a different
+drive, then you might have to modify some settings in the Visual Studio
+project before compiling. See the <a href="readme.txt">readme.txt</a> for more information,
+or you can try updating the code using the following command
+from an MSRS Command Prompt window:<br />
+<tt>DssProjectMigration Apps\QUT</tt>
+</p>
+<p>
+<b>IMPORTANT NOTE:</b> In the explanations that follow I have assumed that
+you unzipped ExplorerSim into the &lt;MSRS&gt; directory. This will create
+an Apps\QUT folder. The ZIP file also contains Dashboard and Maze Simulator folders.
+</p>
+<p>
+Once you have unzipped the file, you need to re-compile the code.
+This will create the DLLs for the services. (They are not included
+in the ZIP file because there can be problems with versioning if
+you have modified any of the standard Microsoft services.)
+</p>
+<p>
+Start a MSRS Command Prompt and then run RebuildQUTApps.bat
+from the DOS prompt.
+Alternatively, locate RebuildQUTApps.cmd in Windows Explorer
+and just double-click on it to run it.
+</p>
+<p>
+Note that when you unzipped ExplorerSim, some default
+configuration files were copied to:<br />
+<tt>&lt;MSRS&gt;\Apps\QUT\Config</tt><br />
+The necessary texture files will be copied to:<br />
+<tt>&lt;MSRS&gt;\store\media\QUT_Textures</tt><br />
+when you run RebuildQUTApps.cmd.
+</p>
+<p>
+There are shortcuts supplied for running the Maze Simulator,
+Intro and Explorer programs. If your MSRS installation is
+not in the standard location, you will have to modify the
+properties of these shortcuts for them to work. You need
+to change the &quot;Target&quot; and &quot;Start In&quot; properties.
+Batch command files are also provided to run each of the
+programs. These are called RunMazeSimulator.bat, RunIntro.bat
+and RunExplorerSim.bat.
+</p>
+<p>
+The manifest that is supplied in the ZIP file uses my Dashboard
+which is a modified version of the Simple Dashboard included with MSRS. You do not
+have to use my version of the Dashboard and you can change the manifest to use the Microsoft
+version if you wish (see the comments in the MazeSimulator.manifest.xml),
+or you can use another manifest called MazeSimulator-SimpleDashboard.manifest.xml.
+However, my version has additional
+features that you might find useful, including the ability to display
+the laser range finder data as a top-down map and also display the
+video from a webcam.
+</p>
+
+<h2>How to run the ExplorerSim</h2>
+<p>
+As with all MSRS programs, you can start the ExplorerSim from a MSRS DOS Command Prompt window,
+or you can open the ExplorerSim project in Visual Studio and start it
+using the debugger. Let's begin with running the program directly.
+Make sure you have followed the installation instructions exactly.
+</p>
+<h3>Starting the ExplorerSim Service</h3>
+<p>
+When you installed MSRS, it should have created a folder in your Start
+Menu that contains a shortcut for "Microsoft Robotics Studio Command Prompt".
+Open one of these windows now.
+</p>
+<p>
+At the command prompt, enter the following command:<br />
+<tt>RunExplorerSim</tt><br />
+(This is a batch file included in the ZIP to help make this easier.)
+</p>
+<p>
+A simpler way to run the program is to browse to the &lt;MSRS&gt; directory
+in Windows Explorer and double-click on the Explorer Simulation
+shortcut. You can copy this shortcut to the Desktop or some other
+folder if you want to.<br />
+<b>NOTE:</b> The shortcut assumes that MSRS is installed on the
+C: drive in the default directory as noted above. If it is not,
+then you will have to modify the shortcut properties. This is
+not explained here.
+</p>
+<h3>Using the Visual Studio Debugger</h3>
+<p>
+To open the source code from Windows Explorer, locate the ExplorerSim.sln
+file which is in the &lt;MSRS&gt;\Apps\QUT\ExplorerSim directory and
+double-click on it.
+</p>
+<p>
+Once the Solution is open in Visual Studio, you can start it with the debugger by
+selecting Debug \ Start Debugging from the menu or pressing F5.<br />
+<b>IMPORTANT NOTE:</b> Make sure that you have updated the Project settings if your
+MSRS installation is not on the C: drive.
+</p>
+
+<h2>Using the ExplorerSim Program</h2>
+<p>
+When ExplorerSim starts, it will create three windows: A <a href="Images/SimView.jpg">Maze Simulator</a>,
+a <a href="Images/DashboardMap.gif">Dashboard</a> and a <a href="Images/Map-Overwrite.gif">Map</a>. These are
+shown below. Click on the images for larger views.
+</p>
+<a href="Images/SimView.jpg"><img src="Images/SimView_small.jpg" alt="Simulator View - Click for larger image" border="0" /></a>&nbsp;&nbsp;<a href="Images/DashboardMap.gif"><img src="Images/DashboardMap_small.gif" alt="Dashboard - Click for larger image" border="0" /></a>&nbsp;&nbsp;<a href="Images/Map-Overwrite.gif"><img src="Images/Map-Overwrite_small.gif" alt="Map - Click for larger image" border="0" /></a>
+<p>
+The Pioneer robot is visible beside the corner in the wall
+to the left of the centre of the sample Simulator view above. (The white
+object in the centre of the window is a ball.)
+This maze world has textured walls and brightly coloured objects.
+The robot will use its Laser Range Finder to locate obstacles and
+drive around the world randomly.
+</p>
+<p>
+You should not have to enter the Remote Node information in the Dashboard
+because my Dashboard remembers the settings (which are saved in
+a config file in the store directory). It should show localhost as the name of the Remote
+Node and Port number 50001. Click on the <b>Connect</b> button.
+Three services will appear in the listbox.
+</p>
+<p>
+Double-click on the
+<i>simulateddifferentialdrive</i> service, then click on the <b>Drive</b> button.
+This allows you to control the robot using either the "trackball"
+or the buttons for forward, backward, turn left and turn right.
+However, the ExplorerSim will do the driving, so you don't need to.
+In fact, if you try to drive the robot manually you will find that
+you are fighting with the ExploerSim program!
+</p>
+<p>
+If you want to drive around on your own, then simply
+run the Maze Simulator instead of the ExplorerSim.
+Note that the Motion Control buttons rely on the DriveDistance and
+RotateDegrees functions that are implemented in my
+updated version of the Simulated Differential Drive.
+Using this approach is actually a good idea for real robots
+because they can't run away from you like the drive-by-wire
+example in the Microsoft tutorials. The robot will only
+perform a specific motion and then stop. If you want to
+change the amount of the turns or the distance driven,
+look in the Tools \ Options dialog.
+</p>
+<p>
+Double-click on the <i>simulatelrf</i> service and you should see
+a map displayed in the Dashboard. This is a top-down view of the
+LRF data. White indicates free space, black indicates obstacles and
+grey is unknown (not visible to the LRF). The robot is located at
+the bottom center of the map. Notice as the robot turns that the
+map also turns because it is relative to the robot.
+</p>
+<p>
+You might have noticed red dots appearing
+on the walls as the robot moves around. These are the laser hits. Now you will be able
+to see in the Laser Range Finder panel a representation of what the robot thinks
+it "sees" using the laser. It does not actually see walls,
+this is just the way it is represented. Remember, the laser scan is only in a
+single horizontal plane at a fixed height off the ground. If you look
+carefully, you will notice that the laser actually misses the small
+black and white ball in the middle of the maze. The robot cannot
+see the ball because the laser is higher than the ball! This is one of the deficiencies of a LRF.
+</p>
+<p>
+(The ExplorerSim program subscribes to the bumpers on the
+robot and it will stop if it hits anything, including the
+ball.)
+</p>
+<p>
+The simulated Pioneer robot has a camera located on top of it (although you
+can't see it in the simulation because it is not included in the mesh
+for the robot). If you select the "robocam" camera from the Camera menu 
+in the Simulator then you will be able to see what the robot sees as it drives around.
+However, the Dashboard can display this view in a separate window so
+that you can see both the robot's view and the top-down view in the
+Simulator. To display the WebCam View window, double-click on the
+<i>simulatedwebcam</i> service in the services list in the Dashboard.
+</p>
+<p>
+A sample view from the robot is shown below:
+</p>
+<img src="Images/WebCamView.jpg" alt="View from Robot's WebCam" border="0" />
+<p>
+<b>NOTE:</b> In the current version of the Dashboard, the WebCam View
+will not resize if you change the size of the window. It is fixed at
+320x240 which is the resolution of the webcam mounted on top of the
+robot. Resizing the window simply scales the image up or down.
+</p>
+<p>
+My version of the Dashboard remembers
+the settings so you only have to enter them once and then save them.
+Select the Tools \ Options menu item to view the current settings.
+There are some interesting changes that you can make in here. Be
+careful not to set the camera update interval too low because your
+computer might not be able to keep up. I suggest no less than 100ms.
+You might also want to experiment with the maximum laser range.
+For more information, see the <a href="ExplorerTutorial.htm"> ExplorerSim Tutorial</a>.
+</p>
+<p>
+<b>NOTE: </b>There
+is another manifest called MazeSimulator-SimpleDashboard.manifest.xml
+that can be used if you want to run Microsoft's Simple Dashboard,
+but once you have used my Dashboard you probably won't want to
+go back.
+</p>
+<p>
+The last window is the Map window. An example is shown below.
+This is explained in more detail in the <a href="ExplorerTutorial.htm"> ExplorerSim Tutorial</a>.<br />
+<img src="Images/Map-Overwrite.gif" vspace="5" hspace="5" />
+</p>
+
+<h2>Shutting down the ExplorerSim</h2>
+<p>
+When you get tired of playing, you can stop
+the program by going back to the DOS window and typing Ctrl-C, i.e. hold
+down Ctrl and press 'c'. This stops the dsshost program, and with it all of
+the associated services that it started. Sometimes it will take a while for
+all of the services to shut down, especially the WebCam.
+</p>
+<p>
+Alternatively, you can select Exit from the File menu in the Simulator.
+This usually closes everything down, but sometimes you might still
+need to close the command prompt window.
+</p>
+<h2>Where to from here?</h2>
+<p>
+You should also look at the <a href="ExplorerTutorial.htm"> ExplorerSim Tutorial</a>
+which explains more features of the program.
+</p>
+<p>
+The ExplorerSim is just a toy. The real power comes when you
+learn how to write programs to control the simulated robot. For that you
+need read the code for ExplorerSim and make changes.
+I suggest doing the Microsoft Simulation Tutorials first (if you have
+not done them already).
+</p>
+<p>
+You should open the ExplorerSim in Visual Studio and look through it.
+I have put comments in the code wherever I made changes. 
+A lot of the code is nearly identical to the Explorer program that
+is supplied by Microsoft.
+</p>
+
+<h3>Notes on the Maze Simulator</h3>
+<p>
+</p>
+<h3>Texture Mapping</h3>
+<p>
+A set of texture files is supplied in the Textures subdirectory under the MazeSimulator
+directory. <b>These will be copied to the store\media\QUT_Textures directory under your
+MSRS root directory.</b>
+</p>
+<p>
+If these files are missing, then you will not see any walls in the
+Maze Simulator. This is interesting because the physics engine
+knows the walls are there and the robot can bump into them. The
+LRF also "sees" them. You can see the laser hits in the following
+screen shot.
+</p>
+<img src="Images/InvisibleWalls.jpg" />
+<p>
+If you want to try out this view without deleting
+all of the textures, you can use a special configuration file that I
+have created for the purpose. It is called
+InvisibleWalls.Config.xml and is located in the MazeSimulator
+folder. You just need copy it to the store directory and
+replace MazeSimulator.Config.xml.
+</p>
+
+<p>
+<a href="Explorer.htm">[&nbsp;Overview&nbsp;]</a>&nbsp;|&nbsp;<a href="ExplorerTutorial.htm">[&nbsp;Tutorial&nbsp;]</a>
+</p>
+<hr />
+<div class="footer">
+Page maintained by:
+<a href="m&#97;&#105;&#108;t&#111;:T.Taylor&#64;qut&#46;edu&#46;au">T.Taylor&#64;qut.edu.au</a>
+&nbsp;&nbsp;&nbsp;Last Updated: 18-Jul-2007
+</div>
+
+</div>
+
+</body>
+</html>

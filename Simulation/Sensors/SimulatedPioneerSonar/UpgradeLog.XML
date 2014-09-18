@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SimulatedPioneerSonar">
+</Property><Property Name="Archivo de la solución" Value="H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\SimulatedPioneerSonar.sln">
+</Property><Property Name="Archivo de opciones de usuario" Value="H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\SimulatedPioneerSonar.suo">
+</Property><Property Name="Date" Value="martes, 24 de noviembre de 2009">
+</Property><Property Name="Time" Value="13:16">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="SimulatedPioneerSonar.sln" Description="La copia H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\Backup\SimulatedPioneerSonar.sln del archivo se ha realizado correctamente">
+</Event><Event ErrorLevel="0" Project="" Source="SimulatedPioneerSonar.suo" Description="La copia H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\Backup\SimulatedPioneerSonar.suo del archivo se ha realizado correctamente">
+</Event><Event ErrorLevel="0" Project="SimulatedPioneerSonar" Source="SimulatedPioneerSonar.csproj" Description="Se realizó correctamente la copia de seguridad del archivo de proyecto H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\Backup\SimulatedPioneerSonar.csproj">
+</Event><Event ErrorLevel="0" Project="SimulatedPioneerSonar" Source="SimulatedPioneerSonar.csproj.user" Description="La copia de seguridad H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\Backup\SimulatedPioneerSonar.csproj.user del archivo se ha creado correctamente">
+</Event><Event ErrorLevel="0" Project="SimulatedPioneerSonar" Source="AssemblyInfo.cs" Description="Se realizó correctamente la copia de seguridad del archivo H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="SimulatedPioneerSonar" Source="SimulatedPioneerSonar.cs" Description="Se realizó correctamente la copia de seguridad del archivo H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\Backup\SimulatedPioneerSonar.cs">
+</Event><Event ErrorLevel="0" Project="SimulatedPioneerSonar" Source="SimulatedPioneerSonarTypes.cs" Description="Se realizó correctamente la copia de seguridad del archivo H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\Backup\SimulatedPioneerSonarTypes.cs">
+</Event><Event ErrorLevel="0" Project="SimulatedPioneerSonar" Source="SimulatedPioneerSonar.custom.proj" Description="Se realizó correctamente la copia de seguridad del archivo H:\Documents and Settings\Raul\Microsoft Robotics Dev Studio 2008 R2\packages\crubots\Simulation\Sensors\SimulatedPioneerSonar\Backup\SimulatedPioneerSonar.custom.proj">
+</Event><Event ErrorLevel="0" Project="SimulatedPioneerSonar" Source="SimulatedPioneerSonar.csproj" Description="Proyecto convertido correctamente">
+</Event><Event ErrorLevel="3" Project="SimulatedPioneerSonar" Source="SimulatedPioneerSonar.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="SimulatedPioneerSonar.sln" Description="La solución se convirtió correctamente">
+</Event><Event ErrorLevel="3" Project="" Source="SimulatedPioneerSonar.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SimulatedPioneerSonar" Source="SimulatedPioneerSonar.csproj" Description="Examen completo: no es necesario actualizar los archivos de proyecto.">
+</Event></UpgradeLog>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ReferencePath>C:\Documents and Settings\Administrador\Microsoft Robotics Dev Studio 2008 R2\bin\</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartWorkingDirectory>C:\Documents and Settings\Administrador\Microsoft Robotics Dev Studio 2008 R2\</StartWorkingDirectory>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Documents and Settings\Administrador\Microsoft Robotics Dev Studio 2008 R2\bin\DssHost.exe</StartProgram>
+    <StartArguments>-port:50000 -tcpport:50001 -manifest:"C:\Microsoft Robotics Studio (1.5)\Apps\UC3M\SimulatedPioneerBumper\SimulatedPioneerBumper.manifest.xml"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartWorkingDirectory>C:\Documents and Settings\Administrador\Microsoft Robotics Dev Studio 2008 R2\</StartWorkingDirectory>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Documents and Settings\Administrador\Microsoft Robotics Dev Studio 2008 R2\bin\DssHost.exe</StartProgram>
+    <StartArguments>-port:50000 -tcpport:50001 -manifest:"C:\Microsoft Robotics Studio (1.5)\Apps\UC3M\SimulatedPioneerBumper\SimulatedPioneerBumper.manifest.xml"</StartArguments>
+  </PropertyGroup>
+</Project>
